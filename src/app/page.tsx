@@ -22,7 +22,7 @@ export default function Home() {
     "see me after class",
   ]
 
-  let score = scoreDescriptions[differenceRounded] || "not even close"
+  const score = scoreDescriptions[differenceRounded] || "not even close"
 
   return (
     <div className='grid grid-rows-[16px_1fr] items-center justify-items-center min-h-screen p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>

@@ -1,5 +1,3 @@
-import { ReactElement, useState } from "react"
-
 const Fader = ({
   className,
   range,
@@ -9,7 +7,7 @@ const Fader = ({
   className: string
   range: number
   noOfSteps: number
-  handleChange: (e: any) => void
+  handleChange: (e: any) => void // eslint-disable-line
 }) => {
   const STEP = range / noOfSteps
 
@@ -17,7 +15,7 @@ const Fader = ({
     <>
       <input
         type='range'
-        // @ts-ignore
+        // @ts-expect-error compatibility
         orient='vertical'
         min={-(range / 2)}
         max={range / 2}

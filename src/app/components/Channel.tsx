@@ -27,7 +27,11 @@ const Channel = ({
   const trackName = src.slice(-25)
 
   useEffect(() => {
-    isPlaying ? audioRef?.current?.play() : audioRef?.current?.pause()
+    if (isPlaying) {
+      audioRef?.current?.play()
+    } else {
+      audioRef?.current?.pause()
+    }
   }, [isPlaying])
 
   useEffect(() => {
@@ -52,7 +56,7 @@ const Channel = ({
       handleBPMUpdate(BPM)
       console.log(`...${trackName} - ${BPM} BPM`)
     }
-  }, [value])
+  }, [value, handleBPMUpdate, originalBPM, trackName])
 
   return (
     <div className='grid grid-rows-[20px_20px_1fr] justify-items-center'>
