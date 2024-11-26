@@ -1,19 +1,55 @@
+"use client"
+
+import { useState } from "react"
 import Channel from "./components/Channel"
 
 export default function Home() {
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const [ch1BPM, setCh1BPM] = useState<number>(123)
+  const [ch2BPM, setCh2BPM] = useState<number>(127)
+
+  console.log({ ch1BPM, ch2BPM })
+
+  const difference = 100 * Math.abs((ch1BPM - ch2BPM) / ((ch1BPM + ch2BPM) / 2))
+
+  const differenceRounded = Math.round(difference)
+  const scoreDescriptions = [
+    "amazing",
+    "fab",
+    "great",
+    "good",
+    "not bad",
+    "see me after class",
+  ]
+
+  let score = scoreDescriptions[differenceRounded] || "not even close"
+
   return (
-    <div className='grid grid-rows-[16px_1fr_16px] items-center justify-items-center min-h-screen p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
-      <h1>BeatMatch</h1>
+    <div className='grid grid-rows-[16px_1fr] items-center justify-items-center min-h-screen p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
+      {isSubmitted ? (
+        <code>{`${difference} % ${score}`}</code>
+      ) : (
+        <button
+          className='bg-yellow-100 text-black p-3'
+          onClick={() => setIsSubmitted(true)}
+        >
+          Submit
+        </button>
+      )}
       <div className='h-full grid grid-cols-2 gap-4'>
         <Channel
-          src='/audio/Happiness Therapy - Groove Boys Project, Fasme & Dusty Fingers - Drop The Beat.mp3'
-          originalBPM={124}
+          src='/audio/Alexander Robotnick - Undicidisco (Justin VanDerVolgen Edit).mp3'
+          originalBPM={123}
           number={1}
+          handleBPMUpdate={(bpm: number) => setCh1BPM(bpm)}
+          isSubmitted={isSubmitted}
         />
         <Channel
           src='/audio/Wim Waldo - ClickClack EP - 02 Footsteps.mp3'
           originalBPM={127}
           number={2}
+          handleBPMUpdate={(bpm: number) => setCh2BPM(bpm)}
+          isSubmitted={isSubmitted}
         />
       </div>
     </div>

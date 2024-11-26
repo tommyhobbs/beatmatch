@@ -25,6 +25,7 @@ const Fader = ({
         className={`${className}`}
         onChange={handleChange}
         list='markers'
+        onContextMenu={(e) => e.preventDefault()}
       ></input>
       <datalist id='markers'>
         {Array(noOfSteps)

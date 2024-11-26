@@ -4,12 +4,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #545454;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #545454;
     --foreground: #ededed;
   }
 }
@@ -26,19 +26,21 @@ input[type="range"][orient="vertical"] {
   appearance: slider-vertical;
   vertical-align: bottom;
   -webkit-appearance: none !important;
-  background-image: url("/fader-background2.jpg");
+  background-image: url("/fader-background3.jpg");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: 50% 50%;
+  box-shadow: 0 0 6px 6px var(--background) inset;
   background-color: transparent;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   appearance: none;
-  width: 100px;
   height: 100px;
+  width: 90px;
   background-image: url("/knob3.png");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   cursor: grab;
 }

@@ -3,13 +3,22 @@ import { ReactElement } from "react"
 const Button = ({
   children,
   onClick,
+  onMouseUp,
+  onMouseDown,
 }: {
   children: ReactElement
   onClick?: () => void
+  onMouseUp?: () => void
+  onMouseDown?: () => void
 }) => (
   <button
-    className='border-2 border-slate-200 active:bg-cyan-600'
+    className='bg-gray-400 active:bg-gray-500'
     onClick={onClick}
+    onMouseDown={onMouseDown}
+    onMouseUp={onMouseUp}
+    onTouchStart={onMouseDown}
+    onTouchEnd={onMouseUp}
+    onContextMenu={(e) => e.preventDefault()}
   >
     {children}
   </button>
