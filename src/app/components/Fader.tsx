@@ -22,7 +22,7 @@ const Fader = ({
         min={-(range / 2)}
         max={range / 2}
         defaultValue={0}
-        className={`${className} border-2 border-slate-200`}
+        className={`${className}`}
         onChange={handleChange}
         list='markers'
       ></input>

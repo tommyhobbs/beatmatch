@@ -4,15 +4,17 @@ import { useState, useEffect, useRef } from "react"
 import Button from "@/app/components/Button"
 import Fader from "@/app/components/Fader"
 
-const SLIDER_RANGE = 200
+const SLIDER_RANGE = 1600
 const NO_OF_STEPS = 8
 
 const Channel = ({
   src,
   originalBPM,
+  number,
 }: {
   src: string
   originalBPM: number
+  number: number
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setPlaying] = useState(false)
@@ -26,9 +28,11 @@ const Channel = ({
 
   useEffect(() => {
     if (audioRef.current) {
-      const playbackRate = Number(1 + value / 1000)
+      const playbackSpeed = Number(value / 100)
+      const playbackRate = 1 + playbackSpeed / 100
+      console.log({ value, playbackSpeed, playbackRate })
       audioRef.current.playbackRate = playbackRate
-      const BPM = originalBPM * playbackRate
+      const BPM = originalBPM + (originalBPM / 100) * playbackSpeed
       console.log(`...${trackName} - ${BPM} BPM`)
     }
   }, [value])
@@ -37,14 +41,14 @@ const Channel = ({
     <div className='grid grid-rows-[60px_1fr]'>
       <h3>{`...${src.slice(-25)}`}</h3>
       <audio src={src} ref={audioRef}></audio>
-      <div className='grid grid-rows-[1fr_80px] gap-2 border-2 border-slate-200'>
+      <div className='grid grid-rows-[1fr_80px] grid-cols-1 gap-2'>
         <Fader
-          className='w-full'
+          className={`channel-${number} w-full`}
           range={SLIDER_RANGE}
           noOfSteps={NO_OF_STEPS}
           handleChange={(e) => setValue(Number(e.currentTarget.value))}
         />
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 border-2 border-slate-200'>
           <Button onClick={() => setPlaying(!isPlaying)}>
             <span>Cue</span>
           </Button>

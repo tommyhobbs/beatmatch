@@ -25,4 +25,24 @@ input[type="range"][orient="vertical"] {
   direction: ltr;
   appearance: slider-vertical;
   vertical-align: bottom;
+  -webkit-appearance: none !important;
+  background-image: url("/fader-background2.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none;
+  width: 100px;
+  height: 100px;
+  background-image: url("/knob3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: grab;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
 }

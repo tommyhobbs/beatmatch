@@ -8,10 +8,12 @@ export default function Home() {
         <Channel
           src='/audio/Happiness Therapy - Groove Boys Project, Fasme & Dusty Fingers - Drop The Beat.mp3'
           originalBPM={124}
+          number={1}
         />
         <Channel
           src='/audio/Wim Waldo - ClickClack EP - 02 Footsteps.mp3'
           originalBPM={127}
+          number={2}
         />
       </div>
     </div>
