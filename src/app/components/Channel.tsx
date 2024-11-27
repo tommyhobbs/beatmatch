@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Button from "@/app/components/Button"
 import Fader from "@/app/components/Fader"
+import Notches from "@/app/components/Notches"
 
 const SLIDER_RANGE = 1600
 const NO_OF_STEPS = 8
@@ -23,6 +24,7 @@ const Channel = ({
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCueing, setIsCueing] = useState(false)
+  const [isCenter, setIsCenter] = useState(true)
   const originalBPM = Number(src.match(/(?<=\[).+?(?=\])/g)?.[0] || 0)
 
   useEffect(() => {
@@ -50,6 +52,7 @@ const Channel = ({
       const playbackRate = 1 + playbackSpeed / 100
       audioRef.current.playbackRate = playbackRate
       const bpm = originalBPM + (originalBPM / 100) * playbackSpeed
+      setIsCenter(playbackRate < 1.002 && playbackRate > 0.998)
       handleBPMUpdate(bpm)
     }
   }
@@ -59,14 +62,15 @@ const Channel = ({
       <h3>{`Ch - ${number}`}</h3>
       {src ? <audio src={src} ref={audioRef}></audio> : null}
       {isSubmitted ? <code>{currentBPM} BPM</code> : <div />}
-      <div className='grid grid-rows-[1fr_80px] grid-cols-1 gap-2'>
+      <div className='grid grid-rows-[1fr_80px] grid-cols-2 gap-2 justify-items-end'>
+        <Notches isCenter={isCenter} />
         <Fader
-          className={`channel-${number}`}
+          className={`channel-${number} justify-self-start`}
           range={SLIDER_RANGE}
           noOfSteps={NO_OF_STEPS}
           handleChange={faderChangeHandler}
         />
-        <div className='grid grid-cols-2 gap-2 text-gray-800'>
+        <div className='col-span-2 grid grid-cols-2 gap-2 text-gray-800'>
           <Button
             onMouseDown={() => setIsCueing(true)}
             onMouseUp={() => setIsCueing(false)}
