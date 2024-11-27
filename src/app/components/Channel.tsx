@@ -21,7 +21,7 @@ const Channel = ({
   isSubmitted: boolean
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [isCueing, setIsCueing] = useState(false)
   const originalBPM = Number(src.match(/(?<=\[).+?(?=\])/g)?.[0] || 0)
 
@@ -31,15 +31,16 @@ const Channel = ({
     } else {
       audioRef?.current?.pause()
     }
+    console.log({ isPlaying })
   }, [isPlaying])
 
   useEffect(() => {
     if (audioRef.current) {
       if (isCueing) {
-        audioRef.current.play()
+        setIsPlaying(true)
         audioRef.current.currentTime = 0
       } else {
-        audioRef.current.pause()
+        setIsPlaying(false)
       }
     }
   }, [isCueing])
@@ -73,7 +74,7 @@ const Channel = ({
           >
             <span className='select-none'>cue</span>
           </Button>
-          <Button onClick={() => setPlaying(!isPlaying)}>
+          <Button onClick={() => setIsPlaying(!isPlaying)}>
             <span className='select-none'>start . stop</span>
           </Button>
         </div>

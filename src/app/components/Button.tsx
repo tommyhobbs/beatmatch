@@ -16,6 +16,7 @@ const Button = ({
     onClick={onClick}
     onMouseDown={onMouseDown}
     onMouseUp={onMouseUp}
+    onMouseLeave={onMouseUp}
     onTouchStart={onMouseDown}
     onTouchEnd={onMouseUp}
     onContextMenu={(e) => e.preventDefault()}
