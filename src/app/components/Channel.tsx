@@ -6,7 +6,6 @@ import Fader from "@/app/components/Fader"
 import Notches from "@/app/components/Notches"
 
 const SLIDER_RANGE = 1600
-const NO_OF_STEPS = 8
 
 const Channel = ({
   src,
@@ -67,7 +66,6 @@ const Channel = ({
         <Fader
           className={`channel-${number} justify-self-start`}
           range={SLIDER_RANGE}
-          noOfSteps={NO_OF_STEPS}
           handleChange={faderChangeHandler}
         />
         <div className='col-span-2 grid grid-cols-2 gap-2 text-gray-800'>

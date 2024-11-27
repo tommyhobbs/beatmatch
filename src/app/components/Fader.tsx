@@ -1,16 +1,12 @@
 const Fader = ({
   className,
   range,
-  noOfSteps,
   handleChange,
 }: {
   className: string
   range: number
-  noOfSteps: number
   handleChange: (e: any) => void // eslint-disable-line
 }) => {
-  const STEP = range / noOfSteps
-
   return (
     <input
       type='range'

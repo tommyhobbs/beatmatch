@@ -1,5 +1,3 @@
-const NOTCH_COUNT = 8
-
 const Notches = ({ isCenter }: { isCenter: boolean }) => {
   const notches = [-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8]
   return (
@@ -10,6 +8,7 @@ const Notches = ({ isCenter }: { isCenter: boolean }) => {
         } else if (number === 0) {
           return (
             <img
+              key={number}
               className='size-8'
               src={isCenter ? "/light-on.jpg" : "/light-off.jpg"}
             />
