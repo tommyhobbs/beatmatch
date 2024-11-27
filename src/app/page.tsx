@@ -23,9 +23,10 @@ export default function Home() {
   const score = scoreDescriptions[differenceRounded] || "not even close"
 
   const tracks = [
-    "/music/wikiloops_jam_252890[120].mp3",
+    "/music/wikiloops_jam_138511[120].mp3 ",
     "/music/wikiloops_jam_262000[124].mp3",
-    "/music/wikiloops_jam_273346[127].mp3",
+    "/music/wikiloops_jam_8855[128].mp3",
+    "/music/wikiloops_jam_185349[125].mp3",
     "/music/wikiloops_jam_300128[115].mp3",
   ]
   useEffect(() => {

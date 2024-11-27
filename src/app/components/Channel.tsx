@@ -31,7 +31,6 @@ const Channel = ({
     } else {
       audioRef?.current?.pause()
     }
-    console.log({ isPlaying })
   }, [isPlaying])
 
   useEffect(() => {
