@@ -11,7 +11,6 @@ export default function Home() {
   console.log({ ch1BPM, ch2BPM })
 
   const difference = 100 * Math.abs((ch1BPM - ch2BPM) / ((ch1BPM + ch2BPM) / 2))
-
   const differenceRounded = Math.round(difference)
   const scoreDescriptions = [
     "amazing",
@@ -21,16 +20,15 @@ export default function Home() {
     "not bad",
     "see me after class",
   ]
-
   const score = scoreDescriptions[differenceRounded] || "not even close"
 
   return (
-    <div className='size-full grid grid-rows-[16px_1fr] items-center justify-items-center p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
+    <div className='size-full grid grid-rows-[24px_1fr] items-center justify-items-center p-4 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
       {isSubmitted ? (
         <code>{`${difference} % ${score}`}</code>
       ) : (
         <button
-          className='bg-yellow-100 text-black p-3'
+          className='bg-yellow-100 text-black p-2 m-2'
           onClick={() => setIsSubmitted(true)}
         >
           Submit
@@ -40,6 +38,7 @@ export default function Home() {
         <Channel
           src='/audio/Alexander Robotnick - Undicidisco (Justin VanDerVolgen Edit).mp3'
           originalBPM={123}
+          currentBPM={ch1BPM}
           number={1}
           handleBPMUpdate={(bpm: number) => setCh1BPM(bpm)}
           isSubmitted={isSubmitted}
@@ -47,6 +46,7 @@ export default function Home() {
         <Channel
           src='/audio/Wim Waldo - ClickClack EP - 02 Footsteps.mp3'
           originalBPM={127}
+          currentBPM={ch2BPM}
           number={2}
           handleBPMUpdate={(bpm: number) => setCh2BPM(bpm)}
           isSubmitted={isSubmitted}

@@ -8,12 +8,14 @@ const NO_OF_STEPS = 8
 const Channel = ({
   src,
   originalBPM,
+  currentBPM,
   number,
   handleBPMUpdate,
   isSubmitted,
 }: {
   src: string
   originalBPM: number
+  currentBPM: number
   number: number
   handleBPMUpdate: (bpm: number) => void
   isSubmitted: boolean
@@ -21,10 +23,6 @@ const Channel = ({
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setPlaying] = useState(false)
   const [isCueing, setIsCueing] = useState(false)
-  const [value, setValue] = useState<number>(0)
-  const [BPM, setBPM] = useState<number>(originalBPM)
-
-  const trackName = src.slice(-25)
 
   useEffect(() => {
     if (isPlaying) {
@@ -45,30 +43,27 @@ const Channel = ({
     }
   }, [isCueing])
 
-  useEffect(() => {
+  const faderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
-      const playbackSpeed = Number(value / 100)
+      const playbackSpeed = Number(e.currentTarget.value) / 100
       const playbackRate = 1 + playbackSpeed / 100
-      console.log({ value, playbackSpeed, playbackRate })
       audioRef.current.playbackRate = playbackRate
-      const BPM = originalBPM + (originalBPM / 100) * playbackSpeed
-      setBPM(Math.round((BPM + Number.EPSILON) * 100) / 100)
-      handleBPMUpdate(BPM)
-      console.log(`...${trackName} - ${BPM} BPM`)
+      const bpm = originalBPM + (originalBPM / 100) * playbackSpeed
+      handleBPMUpdate(bpm)
     }
-  }, [value, handleBPMUpdate, originalBPM, trackName])
+  }
 
   return (
     <div className='grid grid-rows-[20px_20px_1fr] justify-items-center'>
-      <h3>{`...${src.slice(-10)}`}</h3>
+      <h3>{`Ch - ${number}`}</h3>
       <audio src={src} ref={audioRef}></audio>
-      {isSubmitted ? <code>{BPM} BPM</code> : <div />}
+      {isSubmitted ? <code>{currentBPM} BPM</code> : <div />}
       <div className='grid grid-rows-[1fr_80px] grid-cols-1 gap-2'>
         <Fader
           className={`channel-${number}`}
           range={SLIDER_RANGE}
           noOfSteps={NO_OF_STEPS}
-          handleChange={(e) => setValue(Number(e.currentTarget.value))}
+          handleChange={faderChangeHandler}
         />
         <div className='grid grid-cols-2 gap-2 text-gray-800 font-bold'>
           <Button
