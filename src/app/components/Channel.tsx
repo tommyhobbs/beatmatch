@@ -65,15 +65,15 @@ const Channel = ({
           noOfSteps={NO_OF_STEPS}
           handleChange={faderChangeHandler}
         />
-        <div className='grid grid-cols-2 gap-2 text-gray-800 font-bold'>
+        <div className='grid grid-cols-2 gap-2 text-gray-800'>
           <Button
             onMouseDown={() => setIsCueing(true)}
             onMouseUp={() => setIsCueing(false)}
           >
-            <span className='select-none'>Cue</span>
+            <span className='select-none'>cue</span>
           </Button>
           <Button onClick={() => setPlaying(!isPlaying)}>
-            <span className='select-none'>Play / Pause</span>
+            <span className='select-none'>start . stop</span>
           </Button>
         </div>
       </div>

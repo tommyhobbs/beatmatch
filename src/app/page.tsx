@@ -28,10 +28,10 @@ export default function Home() {
         <code>{`${difference} % ${score}`}</code>
       ) : (
         <button
-          className='bg-yellow-100 text-black p-2 m-2'
+          className='bg-yellow-100 text-black p-2 m-2 select-none'
           onClick={() => setIsSubmitted(true)}
         >
-          Submit
+          submit
         </button>
       )}
       <div className='h-full grid grid-cols-2 gap-4'>
