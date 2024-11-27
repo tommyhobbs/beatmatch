@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, useRef } from "react"
 import Button from "@/app/components/Button"
 import Fader from "@/app/components/Fader"
@@ -7,14 +9,12 @@ const NO_OF_STEPS = 8
 
 const Channel = ({
   src,
-  originalBPM,
   currentBPM,
   number,
   handleBPMUpdate,
   isSubmitted,
 }: {
   src: string
-  originalBPM: number
   currentBPM: number
   number: number
   handleBPMUpdate: (bpm: number) => void
@@ -23,6 +23,7 @@ const Channel = ({
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setPlaying] = useState(false)
   const [isCueing, setIsCueing] = useState(false)
+  const originalBPM = Number(src.match(/(?<=\[).+?(?=\])/g)?.[0] || 0)
 
   useEffect(() => {
     if (isPlaying) {
@@ -56,7 +57,7 @@ const Channel = ({
   return (
     <div className='grid grid-rows-[20px_20px_1fr] justify-items-center'>
       <h3>{`Ch - ${number}`}</h3>
-      <audio src={src} ref={audioRef}></audio>
+      {src ? <audio src={src} ref={audioRef}></audio> : null}
       {isSubmitted ? <code>{currentBPM} BPM</code> : <div />}
       <div className='grid grid-rows-[1fr_80px] grid-cols-1 gap-2'>
         <Fader
