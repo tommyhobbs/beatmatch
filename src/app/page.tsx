@@ -25,7 +25,7 @@ export default function Home() {
   const score = scoreDescriptions[differenceRounded] || "not even close"
 
   return (
-    <div className='grid grid-rows-[16px_1fr] items-center justify-items-center min-h-screen p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
+    <div className='size-full grid grid-rows-[16px_1fr] items-center justify-items-center p-2 gap-2 sm:p-2 font-[family-name:var(--font-geist-sans)]'>
       {isSubmitted ? (
         <code>{`${difference} % ${score}`}</code>
       ) : (

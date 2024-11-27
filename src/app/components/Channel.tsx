@@ -78,7 +78,7 @@ const Channel = ({
             <span className='select-none'>Cue</span>
           </Button>
           <Button onClick={() => setPlaying(!isPlaying)}>
-            <span className='select-none'>Play/Pause</span>
+            <span className='select-none'>Play / Pause</span>
           </Button>
         </div>
       </div>
